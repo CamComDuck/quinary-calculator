@@ -5,3 +5,5 @@
 [resource]
 Button/font_sizes/font_size = 70
 Button/fonts/font = ExtResource("1_e1x85")
+Label/font_sizes/font_size = 75
+Label/fonts/font = ExtResource("1_e1x85")
