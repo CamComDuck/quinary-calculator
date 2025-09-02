@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dva8k2jbei0v5"]
+
+[ext_resource type="FontFile" uid="uid://dc5iy7yx3wrij" path="res://Kanit-Bold.ttf" id="1_e1x85"]
+
+[resource]
+Button/font_sizes/font_size = 70
+Button/fonts/font = ExtResource("1_e1x85")
+Label/font_sizes/font_size = 75
+Label/fonts/font = ExtResource("1_e1x85")

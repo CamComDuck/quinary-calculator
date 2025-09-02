@@ -1,0 +1,186 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwwcrxd7jp1cd"]
+
+[ext_resource type="Script" uid="uid://c3a2n3hsnlpys" path="res://calculator/calculator.gd" id="1_3mgqa"]
+[ext_resource type="Script" uid="uid://cw5li5kpv1ig6" path="res://calculator/buttons_grid.gd" id="2_ifdmr"]
+[ext_resource type="Theme" uid="uid://dva8k2jbei0v5" path="res://theme.tres" id="2_mi0oq"]
+[ext_resource type="Script" uid="uid://digoxk2t2burs" path="res://calculator/output_text.gd" id="3_v3hrq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fp73n"]
+bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifdmr"]
+
+[node name="Calculator" type="Node2D"]
+script = ExtResource("1_3mgqa")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 700.0
+offset_bottom = 700.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fp73n")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 700.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="DisplayPanel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifdmr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/DisplayPanel"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 137.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DisplayText" type="Label" parent="Panel/MarginContainer/VBoxContainer/DisplayPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_mi0oq")
+text = "0.0"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("3_v3hrq")
+
+[node name="ButtonsPanel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifdmr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 413.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ButtonsGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 5
+script = ExtResource("2_ifdmr")
+
+[node name="button_0" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "0
+"
+
+[node name="button_1" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "1"
+
+[node name="button_2" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "2"
+
+[node name="button_3" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "3"
+
+[node name="button_4" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "4"
+
+[node name="button_+" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "+"
+
+[node name="button_-" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "-"
+
+[node name="button_X" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "X"
+
+[node name="button_D" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "/"
+
+[node name="button_=" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "="
+
+[node name="button_SQ" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "^2"
+
+[node name="button_SR" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "√"
+
+[connection signal="on_button_pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_0" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_0_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_1" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_1_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_2" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_3" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_4" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_+" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_add_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_-" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_minus_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_X" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_multiply_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_D" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_divide_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_=" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_equal_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_SQ" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_square_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_SR" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_root_pressed"]
