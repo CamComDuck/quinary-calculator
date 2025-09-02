@@ -49,6 +49,23 @@ func add_Quinary_Strings(input1:String, input2:String) -> String:
 	if decimal1 <0 or decimal2 <0:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 + decimal2)
+
+#TODO
+func subtract_Quinary_Strings(input:String) -> String:
+	return""
+	
+#TODO
+func multiply_Quinary_Strings(input:String) -> String:
+	return""
+	
+#TODO
+func divide_Quinary_Strings(input:String) -> String:
+	return""
+	
+#TODO
+func squareRT_Quinary_String(input:String) -> String:
+	return""
+	
 	
 #square one quinary string
 func square_Quinary_String(input:String) -> String:
