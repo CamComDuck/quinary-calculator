@@ -63,9 +63,16 @@ func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 func multiply_Quinary_Strings(input1:String,input2:String) -> String:
 	return""
 	
-#TODO
+#divide one quinary string by another, return a quinary string
 func divide_Quinary_Strings(input1:String,input2:String) -> String:
-	return""
+	var decimal1 := quinary_String_to_Base_10_Int(input1)
+	var decimal2 := quinary_String_to_Base_10_Int(input2)
+	if decimal2 == 0:
+		return "error: undefined"
+	elif decimal1 < 0 or decimal2 < 0:
+		return "error"
+	else:
+		return base_10_Int_to_Quinary_String(decimal1 / decimal2)
 	
 #TODO
 func squareRT_Quinary_String(input:String) -> String:
