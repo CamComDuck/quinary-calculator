@@ -55,7 +55,7 @@ func add_Quinary_Strings(input1:String, input2:String) -> String:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 + decimal2)
 
-#TODO
+# subtract one quinary string from another, return a single quinary string
 func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 	var decimal1 := quinary_String_to_Base_10_Int(input1)
 	var decimal2 := quinary_String_to_Base_10_Int(input2)
@@ -64,9 +64,14 @@ func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 - decimal2)
 	
-#TODO
+# multiply one quinary string by another, return a quinary string
 func multiply_Quinary_Strings(input1:String,input2:String) -> String:
-	return""
+	var decimal1 := quinary_String_to_Base_10_Int(input1)
+	var decimal2 := quinary_String_to_Base_10_Int(input2)
+	
+	if decimal1 < 0 or decimal2 < 0:
+		return "error"
+	return base_10_Int_to_Quinary_String(decimal1 * decimal2)
 	
 #divide one quinary string by another, return a quinary string
 func divide_Quinary_Strings(input1:String,input2:String) -> String:
@@ -79,10 +84,16 @@ func divide_Quinary_Strings(input1:String,input2:String) -> String:
 	else:
 		return base_10_Int_to_Quinary_String(decimal1 / decimal2)
 	
-#TODO
+# sqrt a single quinary string, return a quinary string
 func squareRT_Quinary_String(input:String) -> String:
-	return""
+	var decimal := quinary_String_to_Base_10_Int(input)
 	
+	if decimal == 0:
+		return "error: undefined"
+	elif decimal < 0:
+		return "error"
+	else:
+		return base_10_Int_to_Quinary_String(decimal ** 0.5)
 	
 #square one quinary string
 func square_Quinary_String(input:String) -> String:
