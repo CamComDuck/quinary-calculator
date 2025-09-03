@@ -171,6 +171,13 @@ size_flags_vertical = 3
 theme = ExtResource("2_mi0oq")
 text = "√"
 
+[node name="button_CE" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_mi0oq")
+text = "CE"
+
 [connection signal="on_button_pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_0" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_0_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_1" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_1_pressed"]
@@ -184,3 +191,4 @@ text = "√"
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_=" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_equal_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_SQ" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_square_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_SR" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_root_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid/button_CE" to="Panel/MarginContainer/VBoxContainer/ButtonsPanel/MarginContainer/ButtonsGrid" method="_on_button_ce_pressed"]

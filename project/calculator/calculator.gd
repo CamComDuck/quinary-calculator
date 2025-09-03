@@ -222,7 +222,10 @@ func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
 			elif calcChoice == "/":
 				num1 =divide_Quinary_Strings(num1,num2)
 				reset_on_calc()
-	
+				
+	if ButtonsGrid.calc_button.keys()[button_pressed] == "CLEAR":
+		full_reset()
+		
 		
 			
 	_update_display(num1 + calcChoice + num2)
