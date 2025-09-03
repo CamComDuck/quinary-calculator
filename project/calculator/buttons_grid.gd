@@ -15,7 +15,8 @@ enum calc_button {
 	DIVIDE,
 	EQUAL,
 	SQUARE,
-	ROOT
+	ROOT,
+	CLEAR
 }
 
 func _on_button_0_pressed() -> void:
@@ -64,3 +65,7 @@ func _on_button_square_pressed() -> void:
 
 func _on_button_root_pressed() -> void:
 	on_button_pressed.emit(calc_button.ROOT)
+
+
+func _on_button_ce_pressed() -> void:
+	on_button_pressed.emit(calc_button.CLEAR)
