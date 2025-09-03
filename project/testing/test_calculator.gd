@@ -91,3 +91,20 @@ func test_divide_out_of_range():
 	var calculator_script = load("res://calculator/calculator.gd").new()
 	var result: String = calculator_script.divide_Quinary_Strings("8", "2")
 	assert_eq(result, "error")
+
+func test_subtract_normal():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.subtract_Quinary_Strings("10", "4")
+	assert_eq(result, "1")
+func test_subtract_with_negative():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.subtract_Quinary_Strings("10", "-1")
+	assert_eq(result, "error")
+func test_subtract_non_numeric():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.subtract_Quinary_Strings("A", "5")
+	assert_eq(result, "error")
+func test_subtract_out_of_range():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.subtract_Quinary_Strings("85", "4")
+	assert_eq(result, "error")
