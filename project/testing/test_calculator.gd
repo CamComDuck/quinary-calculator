@@ -92,6 +92,7 @@ func test_divide_out_of_range():
 	var result: String = calculator_script.divide_Quinary_Strings("8", "2")
 	assert_eq(result, "error")
 
+# Testing subtraction
 func test_subtract_normal():
 	var calculator_script = load("res://calculator/calculator.gd").new()
 	var result: String = calculator_script.subtract_Quinary_Strings("10", "4")
@@ -107,4 +108,44 @@ func test_subtract_non_numeric():
 func test_subtract_out_of_range():
 	var calculator_script = load("res://calculator/calculator.gd").new()
 	var result: String = calculator_script.subtract_Quinary_Strings("85", "4")
+	assert_eq(result, "error")
+
+# Testing multiplication
+func test_multiplication_normal():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.multiply_Quinary_Strings("4", "2")
+	assert_eq(result, "13")
+func test_multiplication_with_negative():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.multiply_Quinary_Strings("10", "-1")
+	assert_eq(result, "error")
+func test_multiplication_non_numeric():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.multiply_Quinary_Strings("A", "5")
+	assert_eq(result, "error")
+func test_multiplication_out_of_range():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.multiply_Quinary_Strings("85", "4")
+	assert_eq(result, "error")
+
+# Testing Sqrt
+func test_sqrt_normal():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.squareRT_Quinary_String("4")
+	assert_eq(result, "2")
+func test_sqrt_with_zero():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.squareRT_Quinary_String("0")
+	assert_eq(result, "error: undefined")
+func test_sqrt_with_negative():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.squareRT_Quinary_String("-4")
+	assert_eq(result, "error")
+func test_sqrt_non_numeric():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.squareRT_Quinary_String("A")
+	assert_eq(result, "error")
+func test_sqrt_out_of_range():
+	var calculator_script = load("res://calculator/calculator.gd").new()
+	var result: String = calculator_script.squareRT_Quinary_String("8")
 	assert_eq(result, "error")
