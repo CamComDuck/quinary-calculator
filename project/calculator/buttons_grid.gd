@@ -2,6 +2,7 @@ class_name ButtonsGrid
 extends GridContainer
 
 signal on_button_pressed(button_pressed : calc_button)
+signal while_button_held(button_pressed : calc_button)
 
 enum calc_button {
 	ZERO,
@@ -16,7 +17,8 @@ enum calc_button {
 	EQUAL,
 	SQUARE,
 	ROOT,
-	CLEAR
+	CLEAR,
+	TOGGLE
 }
 
 func _on_button_0_pressed() -> void:
