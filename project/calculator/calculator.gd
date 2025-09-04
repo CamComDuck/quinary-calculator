@@ -28,6 +28,7 @@ func quinary_String_to_Base_10_Int(input:String) -> int:
 		output = output *5 +x
 	return output
 	
+	
 #converts a decimal back into a quinary string in order to be displayed eventually
 func base_10_Int_to_Quinary_String(input:int) -> String:
 	#dont allow negatives
@@ -47,6 +48,7 @@ func base_10_Int_to_Quinary_String(input:int) -> String:
 		input = input/5
 	return output
 	
+	
 #add two quinary strings together, return a quinary string
 func add_Quinary_Strings(input1:String, input2:String) -> String:
 	var decimal1 := quinary_String_to_Base_10_Int(input1)
@@ -55,6 +57,7 @@ func add_Quinary_Strings(input1:String, input2:String) -> String:
 	if decimal1 <0 or decimal2 <0:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 + decimal2)
+
 
 # subtract one quinary string from another, return a single quinary string
 func subtract_Quinary_Strings(input1:String,input2:String) -> String:
@@ -65,6 +68,7 @@ func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 - decimal2)
 	
+	
 # multiply one quinary string by another, return a quinary string
 func multiply_Quinary_Strings(input1:String,input2:String) -> String:
 	var decimal1 := quinary_String_to_Base_10_Int(input1)
@@ -73,6 +77,7 @@ func multiply_Quinary_Strings(input1:String,input2:String) -> String:
 	if decimal1 < 0 or decimal2 < 0:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 * decimal2)
+	
 	
 #divide one quinary string by another, return a quinary string
 func divide_Quinary_Strings(input1:String,input2:String) -> String:
@@ -86,6 +91,7 @@ func divide_Quinary_Strings(input1:String,input2:String) -> String:
 		@warning_ignore("integer_division")
 		return base_10_Int_to_Quinary_String(decimal1 / decimal2)
 	
+	
 # sqrt a single quinary string, return a quinary string
 func squareRT_Quinary_String(input:String) -> String:
 	var decimal := quinary_String_to_Base_10_Int(input)
@@ -97,6 +103,7 @@ func squareRT_Quinary_String(input:String) -> String:
 	else:
 		@warning_ignore("narrowing_conversion")
 		return base_10_Int_to_Quinary_String(decimal ** 0.5)
+	
 	
 #square one quinary string
 func square_Quinary_String(input:String) -> String:
@@ -116,6 +123,7 @@ func divide_calc(num_1 : int, num_2 : int) -> float:
 		@warning_ignore("integer_division")
 		return num_1 / num_2
 
+
 func divide_out(input : float) -> String:
 	if input == -100:
 		return "Undefined"
@@ -128,14 +136,17 @@ func reset_on_calc():
 	calcChoice = ButtonsGrid.calc_button.NONE
 	isSecondNum = false
 	
+	
 func full_reset():
 	num1 = ""
 	num2 = ""
 	calcChoice = ButtonsGrid.calc_button.NONE
 	isSecondNum = false
+	
 
 func _update_display(new_display_text : String) -> void:
 	display_text.update_display(new_display_text)
+	
 	
 func _calc_choice_string() -> String:
 	match calcChoice:
@@ -152,6 +163,7 @@ func _calc_choice_string() -> String:
 			return "/"
 			
 	return ""
+	
 
 func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
 	var button_pressed_name = ButtonsGrid.calc_button.keys()[button_pressed]
@@ -207,14 +219,16 @@ func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
 			
 	_update_display(num1 + _calc_choice_string() + num2)
 
+
 func _on_button_dc_button_down() -> void:
 	if num2 == "" and calcChoice == ButtonsGrid.calc_button.NONE:
-		var num = num1
-		var decimal = quinary_String_to_Base_10_Int(num)
+		var num := num1
+		var decimal := quinary_String_to_Base_10_Int(num)
 		print(decimal)
 
-		var temp = str(decimal)
+		var temp := str(decimal)
 		_update_display(temp)
+	
 	
 func _on_button_dc_button_up() -> void:
 	_update_display(num1 + _calc_choice_string() + num2)
