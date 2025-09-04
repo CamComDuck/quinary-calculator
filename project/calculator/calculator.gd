@@ -1,12 +1,12 @@
 class_name Calculator
 extends Node2D
 
-var last_button_pressed : int = -1
+#var last_button_pressed : int = -1
 
-var num1 = ""
-var num2 = ""
-var calcChoice = ""
-var currentNum= 1
+var num1 : String = ""
+var num2 : String = ""
+var calcChoice : ButtonsGrid.calc_button = ButtonsGrid.calc_button.NONE
+var isSecondNum := false
 
 @onready var display_text := %DisplayText as DisplayText
 
@@ -28,6 +28,7 @@ func quinary_String_to_Base_10_Int(input:String) -> int:
 		output = output *5 +x
 	return output
 	
+	
 #converts a decimal back into a quinary string in order to be displayed eventually
 func base_10_Int_to_Quinary_String(input:int) -> String:
 	#dont allow negatives
@@ -38,13 +39,15 @@ func base_10_Int_to_Quinary_String(input:int) -> String:
 		return "0"
 	var output := "" 
 	#convert each digit of the input
-	while input >0:
+	while input > 0:
 		# % input by 5 converts the digit into base 5, concat to the output string
-		output =str(input %5) +output
+		output = str(input %5) +output
 		# this removes the digit previously calculated thru int division, like dividing something by 10
 		# in base 10 does (150/10 = 15, the 0 is effectively removed)
+		@warning_ignore("integer_division")
 		input = input/5
 	return output
+	
 	
 #add two quinary strings together, return a quinary string
 func add_Quinary_Strings(input1:String, input2:String) -> String:
@@ -55,6 +58,7 @@ func add_Quinary_Strings(input1:String, input2:String) -> String:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 + decimal2)
 
+
 # subtract one quinary string from another, return a single quinary string
 func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 	var decimal1 := quinary_String_to_Base_10_Int(input1)
@@ -63,6 +67,7 @@ func subtract_Quinary_Strings(input1:String,input2:String) -> String:
 	if decimal1 < 0 or decimal2 < 0:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 - decimal2)
+	
 	
 # multiply one quinary string by another, return a quinary string
 func multiply_Quinary_Strings(input1:String,input2:String) -> String:
@@ -73,6 +78,7 @@ func multiply_Quinary_Strings(input1:String,input2:String) -> String:
 		return "error"
 	return base_10_Int_to_Quinary_String(decimal1 * decimal2)
 	
+	
 #divide one quinary string by another, return a quinary string
 func divide_Quinary_Strings(input1:String,input2:String) -> String:
 	var decimal1 := quinary_String_to_Base_10_Int(input1)
@@ -82,7 +88,9 @@ func divide_Quinary_Strings(input1:String,input2:String) -> String:
 	elif decimal1 < 0 or decimal2 < 0:
 		return "error"
 	else:
+		@warning_ignore("integer_division")
 		return base_10_Int_to_Quinary_String(decimal1 / decimal2)
+	
 	
 # sqrt a single quinary string, return a quinary string
 func squareRT_Quinary_String(input:String) -> String:
@@ -93,7 +101,9 @@ func squareRT_Quinary_String(input:String) -> String:
 	elif decimal < 0:
 		return "error"
 	else:
+		@warning_ignore("narrowing_conversion")
 		return base_10_Int_to_Quinary_String(decimal ** 0.5)
+	
 	
 #square one quinary string
 func square_Quinary_String(input:String) -> String:
@@ -110,7 +120,9 @@ func divide_calc(num_1 : int, num_2 : int) -> float:
 	elif (num_1 < 0 or num_2 < 0 or num_1 > 4 or num_2 > 4):
 		return -100
 	else:
+		@warning_ignore("integer_division")
 		return num_1 / num_2
+
 
 func divide_out(input : float) -> String:
 	if input == -100:
@@ -121,120 +133,102 @@ func divide_out(input : float) -> String:
 		
 func reset_on_calc():
 	num2 = ""
-	calcChoice = ""
-	currentNum = 1
+	calcChoice = ButtonsGrid.calc_button.NONE
+	isSecondNum = false
+	
 	
 func full_reset():
 	num1 = ""
 	num2 = ""
-	calcChoice = ""
-	currentNum = 1
+	calcChoice = ButtonsGrid.calc_button.NONE
+	isSecondNum = false
+	
 
 func _update_display(new_display_text : String) -> void:
 	display_text.update_display(new_display_text)
+	
+	
+func _calc_choice_string() -> String:
+	match calcChoice:
+		ButtonsGrid.calc_button.ADD:
+			return "+"
+			
+		ButtonsGrid.calc_button.SUBTRACT:
+			return "-"
+			
+		ButtonsGrid.calc_button.MULTIPLY:
+			return "*"
+			
+		ButtonsGrid.calc_button.DIVIDE:
+			return "/"
+			
+	return ""
+	
 
 func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
-	print(ButtonsGrid.calc_button.keys()[button_pressed])
+	var button_pressed_name = ButtonsGrid.calc_button.keys()[button_pressed]
+	print(button_pressed_name)
 	
-	#defintely a better way to do this, I just havent looked into it yet
-	
-	
-	#------------------------numbers-------------------------------------
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "ZERO":
-		if currentNum == 1:
-			num1+="0"
-		elif currentNum == 2:
-			num2+="0"
+	# 0 - 4 key was pressed (a number)
+	if button_pressed <= 4:
+		if isSecondNum:
+			num2 = str(button_pressed)
+		else:
+			num1 = str(button_pressed)
 			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "ONE":
-		if currentNum == 1:
-			num1+="1"
-		elif currentNum == 2:
-			num2+="1"
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "TWO":
-		if currentNum == 1:
-			num1+="2"
-		elif currentNum == 2:
-			num2+="2"
-	
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "THREE":
-		if currentNum == 1:
-			num1+="3"
-		elif currentNum == 2:
-			num2+="3"
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "FOUR":
-		if currentNum == 1:
-			num1+="4"
-		elif currentNum == 2:
-			num2+="4"
-			
-		#-------------------Methods---------------------------
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "ADD":
-		if calcChoice == "" and num1 != "":
-			calcChoice = "+"
-			currentNum = 2
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "SUBTRACT":
-		if calcChoice == "" and num1 != "":
-			calcChoice = "-"
-			currentNum = 2
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "MULTIPLY":
-		if calcChoice == "" and num1 != "":
-			calcChoice = "*"
-			currentNum = 2
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "DIVIDE":
-		if calcChoice == "" and num1 != "":
-			calcChoice = "/"
-			currentNum = 2
-			
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "SQUARE":
-		if  num1 != "" or num2 != "":
-			if currentNum == 1:
+	# 5 - 8 key was pressed (+, -, *, /)
+	elif button_pressed <= 8:
+		if calcChoice == ButtonsGrid.calc_button.NONE and num1 != "":
+			calcChoice = button_pressed
+			isSecondNum = true
+		
+	elif button_pressed == ButtonsGrid.calc_button.SQUARE:
+		if num1 != "" or num2 != "":
+			if not isSecondNum:
 				num1 = square_Quinary_String(num1)
-			elif currentNum == 2:
+			else:
 				num2 = square_Quinary_String(num2)
-				
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "ROOT":
-		if  num1 != "" or num2 != "":
-			if currentNum == 1:
-				num1 = squareRT_Quinary_String(num1)
-			elif currentNum == 2:
-				num2 = squareRT_Quinary_String(num2)
 	
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "EQUAL":
-		if  num1 != "" and num2 != "" and calcChoice != "":
-			if calcChoice == "+":
+	elif button_pressed == ButtonsGrid.calc_button.ROOT:
+		if num1 != "" or num2 != "":
+			if not isSecondNum:
+				num1 = squareRT_Quinary_String(num1)
+			else:
+				num2 = squareRT_Quinary_String(num2)
+		
+	elif button_pressed == ButtonsGrid.calc_button.EQUAL:
+		if num1 != "" and num2 != "" and calcChoice != ButtonsGrid.calc_button.NONE:
+			if calcChoice == ButtonsGrid.calc_button.ADD:
 				num1 = add_Quinary_Strings(num1,num2)
 				reset_on_calc()
-			elif calcChoice == "-":
+				
+			elif calcChoice == ButtonsGrid.calc_button.SUBTRACT:
 				num1 = subtract_Quinary_Strings(num1,num2)
 				reset_on_calc()
-			elif calcChoice == "*":
-				num1 =multiply_Quinary_Strings(num1,num2)
-				reset_on_calc()
-				currentNum
-			elif calcChoice == "/":
-				num1 =divide_Quinary_Strings(num1,num2)
+				
+			elif calcChoice == ButtonsGrid.calc_button.MULTIPLY:
+				num1 = multiply_Quinary_Strings(num1,num2)
 				reset_on_calc()
 				
-	if ButtonsGrid.calc_button.keys()[button_pressed] == "CLEAR":
+			elif calcChoice == ButtonsGrid.calc_button.DIVIDE:
+				num1 = divide_Quinary_Strings(num1,num2)
+				reset_on_calc()
+	
+	elif button_pressed == ButtonsGrid.calc_button.CLEAR:
 		full_reset()
 			
-	_update_display(num1 + calcChoice + num2)
+	_update_display(num1 + _calc_choice_string() + num2)
+
 
 func _on_button_dc_button_down() -> void:
-	if num2 == "" and calcChoice == "":
-		var num = num1
-		var decimal = quinary_String_to_Base_10_Int(num)
+	if num2 == "" and calcChoice == ButtonsGrid.calc_button.NONE:
+		var num := num1
+		var decimal := quinary_String_to_Base_10_Int(num)
 		print(decimal)
 
-		var temp = str(decimal)
+		var temp := str(decimal)
 		_update_display(temp)
 	
+	
 func _on_button_dc_button_up() -> void:
-	_update_display(num1 + calcChoice + num2)
+	_update_display(num1 + _calc_choice_string() + num2)
