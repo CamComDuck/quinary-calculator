@@ -129,7 +129,6 @@ func full_reset():
 	num2 = ""
 	calcChoice = ""
 	currentNum = 1
-	
 
 func _update_display(new_display_text : String) -> void:
 	display_text.update_display(new_display_text)
@@ -225,8 +224,17 @@ func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
 				
 	if ButtonsGrid.calc_button.keys()[button_pressed] == "CLEAR":
 		full_reset()
-		
-		
 			
 	_update_display(num1 + calcChoice + num2)
+
+func _on_button_dc_button_down() -> void:
+	if num2 == "" and calcChoice == "":
+		var num = num1
+		var decimal = quinary_String_to_Base_10_Int(num)
+		print(decimal)
+
+		var temp = str(decimal)
+		_update_display(temp)
 	
+func _on_button_dc_button_up() -> void:
+	_update_display(num1 + calcChoice + num2)
