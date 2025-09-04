@@ -172,9 +172,9 @@ func _on_button_pressed(button_pressed : ButtonsGrid.calc_button) -> void:
 	# 0 - 4 key was pressed (a number)
 	if button_pressed <= 4:
 		if isSecondNum:
-			num2 = str(button_pressed)
+			num2 += str(button_pressed)
 		else:
-			num1 = str(button_pressed)
+			num1 += str(button_pressed)
 			
 	# 5 - 8 key was pressed (+, -, *, /)
 	elif button_pressed <= 8:
